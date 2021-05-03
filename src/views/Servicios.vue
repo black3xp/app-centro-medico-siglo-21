@@ -3,8 +3,8 @@
     <pantalla-carga v-if="carga"/>
     <BarraSuperior :atras="'/'"/>
     <h2 class="title">Solicitud {{nombreServicio || 'No service'}}</h2>
-    <div class="alert alert-danger" role="alert" v-if="servicio.flag === 'PRE'">
-      <p>Agregue una foto por cada una de las recetas o indicaciones medicas</p>
+    <div class="alert alert-success" role="alert" v-if="servicio.flag === 'PRE'">
+      <p style="margin: 0">Agregue una foto por cada una de las recetas o indicaciones medicas</p>
     </div>
     <form @submit.prevent="enviarSolicitud">
       <Select

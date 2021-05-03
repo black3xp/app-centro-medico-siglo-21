@@ -27,7 +27,7 @@ body{
 .item{
   text-decoration: none !important;
 }
-.alert::after{
+.alert-danger::after{
   content: '';
   width: 0;
   height: 0;
