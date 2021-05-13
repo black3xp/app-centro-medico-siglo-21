@@ -53,6 +53,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/ConfirmacionSolicitud.vue'),
   },
   {
+    path: '/mis-solicitudes/:id',
+    name: 'MisSolicitudes',
+    meta: {
+      requiresAuth: true,
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../views/SolicitudDetalle.vue'),
+  },
+  {
     path: '/confirmacion/correo/:correo',
     name: 'ConfirmacionCorreo',
     component: () => import(/* webpackChunkName: "about" */ '../views/ConfirmacionCorreo.vue'),

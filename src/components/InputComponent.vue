@@ -6,10 +6,12 @@
         class="form-control"
         :name="name"
         :id="id"
+        :value="valor"
         :placeholder="placeholder"
         :required="requerido"
         :autocomplete="autocomplete"
         @input="actualizarInput"
+        :readonly="readonly"
       />
     </div>
 </template>
@@ -17,7 +19,7 @@
 <script>
 export default {
   name: 'InputComponent',
-  props: ['tipo', 'id', 'placeholder', 'requerido', 'label', 'modelValue', 'name', 'autocomplete'],
+  props: ['tipo', 'id', 'placeholder', 'requerido', 'label', 'modelValue', 'name', 'autocomplete', 'valor', 'readonly'],
   methods: {
     actualizarInput(event) {
       this.$emit('update:modelValue', event.target.value);

@@ -24,20 +24,14 @@
         </div>
       </div>
       <p class="sub-title"><strong>Mis solicitudes</strong></p>
-      <router-link :to="'/'">
-        <div class="mis-solicitudes">
-          <div class="texto">
-            <p><strong>Preatuorizaciones de estudios</strong></p>
-            <small>
-              <span class="circulo-verde"></span>
-              Todo esta listo
-            </small>
-          </div>
-          <div class="icono">
-            <span class="material-icons">login</span>
-          </div>
-        </div>
-      </router-link>
+      <mis-solicitudes
+        v-for="(item, index) in misSolicitudes"
+        :key="index"
+        :codigo="item.codigo"
+        :fecha="item.createdAt"
+        :id="item.id"
+        :estado="item.estadoId"
+      /><br><br><br><br>
     </div>
     <Menu />
 </template>
@@ -54,6 +48,7 @@ import axios from 'axios';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { url, isLogin } from '@/util/index';
+import MisSolicitudes from '@/components/MisSolicitudes.vue';
 
 // eslint-disable-next-line import/no-unresolved
 const imgCovid = require('@/assets/images/icons/virus.svg');
@@ -66,11 +61,13 @@ export default {
     Menu,
     BarraNoAtras,
     Solicitudes,
+    MisSolicitudes,
   },
   data() {
     return {
       show: false,
       nombreUser: '',
+      misSolicitudes: [],
       servicios: [
         // eslint-disable-next-line global-require
         { nombre: 'Covid 19', icon: imgCovid, url: '/solicitud/nueva/ec197870-82e1-4215-9140-6b129f71c3e1' }],
@@ -90,8 +87,11 @@ export default {
         url: `${url}/solicitudes`,
       };
       axios(config).then((res) => {
-        console.log(res.data);
+        const { data } = res;
+        const solicitudes = data;
+        this.misSolicitudes = solicitudes.slice(solicitudes.length - 5);
       }).catch((err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
       });
     },
@@ -102,7 +102,6 @@ export default {
         // eslint-disable-next-line no-const-assign
         usuario = jwt_decode(token);
       }
-
       const nombre = usuario.display_name.split(' ')[0];
       this.nombreUser = nombre;
     },
@@ -117,9 +116,6 @@ export default {
 <style lang="less" scoped>
 @import url('../assets/style/global.less');
 .home{
-  a:hover{
-    text-decoration: none;
-  }
   height: 100%;
   .sub-title{
     font-size: 16px;
@@ -129,25 +125,6 @@ export default {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-  }
-  .mis-solicitudes{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    border: 3px solid @card-background-serv;
-    padding: 10px;
-    border-radius: 15px;
-    .icono{
-      color: @siglo-color;
-    }
-    .texto{
-      position: relative;
-      color: @siglo-color;
-      p{
-        margin: 0;
-      }
-    }
   }
 }
 .servicios{
@@ -160,33 +137,5 @@ h1{
   span{
     font-weight: 400;
   }
-}
-.circulo-verde::after{
-  background-color: yellowgreen;
-  height: 10px;
-  width: 10px;
-  content: ' ';
-  position: absolute;
-  left: 0;
-  display: flex;
-  margin-top: 6px;
-  border-radius: 50%;
-}
-.circulo-verde{
-  padding-left: 15px;
-}
-.circulo-rojo::after{
-  background-color: red;
-  height: 10px;
-  width: 10px;
-  content: ' ';
-  position: absolute;
-  left: 0;
-  display: flex;
-  margin-top: 6px;
-  border-radius: 50%;
-}
-.circulo-rojo{
-  padding-left: 15px;
 }
 </style>

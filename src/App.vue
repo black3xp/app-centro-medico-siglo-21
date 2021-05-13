@@ -11,6 +11,9 @@ export default {
 
 <style lang="less">
 @import './assets/style/global.less';
+a:hover{
+  text-decoration: none !important;
+}
 body{
   font-family: @font-primary;
   color: @color-primary;
@@ -67,5 +70,33 @@ input, select{
   width: 50px;
   height: 50px;
   margin: 20px auto;
+}
+.circulo-verde::after{
+  background-color: yellowgreen;
+  height: 10px;
+  width: 10px;
+  content: ' ';
+  position: absolute;
+  left: 0;
+  display: flex;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.circulo-verde{
+  padding-left: 15px;
+}
+.circulo-rojo::after{
+  background-color: red;
+  height: 10px;
+  width: 10px;
+  content: ' ';
+  position: absolute;
+  left: 0;
+  display: flex;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.circulo-rojo{
+  padding-left: 15px;
 }
 </style>

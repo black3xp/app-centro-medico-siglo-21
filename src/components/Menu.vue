@@ -13,8 +13,8 @@
         class="item"
         href="#"
       >
-        <span class="material-icons">search</span>
-        <p>Buscar</p>
+        <span class="material-icons">fact_check</span>
+        <p>Solicitudes</p>
       </router-link>
       <router-link
         :to="{ name: 'Solicitudes', params: { id: 123 } }"
